@@ -7,7 +7,7 @@
 <script type="text/javascript" src="{{ url_for('static',filename='js/reqCtrl.js') }}"></script>
 {% endblock %}
 {% block body %}
-<form id='formulario' action='cadastrarreq' onsubmit="return submeter()" method='POST' enctype="multipart/form-data">
+<form id='formulario' action='http://localhost/NkeWebInterface/API/index.php/Api/salvar'  method='POST' enctype="multipart/form-data">
   <div class="form-group">
     <label for="InputEmail">Email</label>
     <input name="InputEmail" required type="email" class="form-control" id="InputEmail" placeholder="Digite seu email">
@@ -16,11 +16,12 @@
     <label for="InputMatricula">Matricula</label>
     <input required name="InputMatricula" type="number" class="form-control" id="InputMatricula" placeholder="Digite sua matricula">
   </div>
+  <input type='hidden' name='fileName' id=fileName value='piracanjuba'>
   <div class="">
     <label for="InputArquivo">Nke.rar</label>
     <input required type="file"  name="InputArquivo" id="InputArquivo" placeholder="Selecione o seu Nke compactado">
   </div>
-  <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+  <button type="submit" onclick="submeter()" class="btn btn-primary">Enviar</button>
 
 {% endblock %}
