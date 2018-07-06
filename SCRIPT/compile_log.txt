@@ -1,0 +1,48 @@
+rm -f ../*/*.o ../*/*.elf ../*/*~ ../*/*.bin ../*/*.map ../*/*.hex
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Aplicacoes/teste.o ../Aplicacoes/teste.c
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Kernel/syscall.o ../Kernel/syscall.c
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Kernel/scheduler.o ../Kernel/scheduler.c
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Kernel/usercall.o ../Kernel/usercall.c
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Kernel/debug.o ../Kernel/debug.c
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Kernel/initkernel.o ../Kernel/initkernel.c
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Kernel/kernel.o ../Kernel/kernel.c
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Placa/init.o ../Placa/init.c
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Placa/uart.o ../Placa/uart.c
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Placa/lcd.o ../Placa/lcd.c
+arm-elf-gcc -c -Wall -O2 -mcpu=arm7tdmi -D BAUDRATE=19200 -D MODELO=2011 -o ../Placa/interrupt.o ../Placa/interrupt.c
+arm-elf-as -mapcs-32 -mcpu=arm7tdmi -o ../Kernel/salva.o ../Kernel/salva.S 
+arm-elf-as -mapcs-32 -mcpu=arm7tdmi -o ../Placa/crt.o ../Placa/crt.S 
+arm-elf-gcc -nostartfiles -Tlpc2378_flash.ld -o PaNKE.elf ../Aplicacoes/teste.o ../Kernel/syscall.o ../Kernel/scheduler.o ../Kernel/usercall.o ../Kernel/debug.o ../Kernel/initkernel.o ../Kernel/kernel.o ../Placa/init.o ../Placa/uart.o ../Placa/lcd.o ../Placa/interrupt.o ../Kernel/salva.o ../Placa/crt.o
+arm-elf-objcopy -O ihex PaNKE.elf PaNKE.hex
+lpc21isp -control PaNKE.hex /dev/ttyUSB0 19200 12000
+lpc21isp version 1.32
+File PaNKE.hex:
+	loaded...
+	converted to binary format...
+	image size : 17692
+ioctl get ok, status = 6
+ioctl set ok, status = 6
+ioctl get ok, status = 6
+ioctl get ok, status = 6
+ioctl set ok, status = 4
+ioctl get ok, status = 4
+ioctl get ok, status = 4
+ioctl set ok, status = 0
+ioctl get ok, status = 0
+Synchronizing. OK
+Read bootcode version: 3.4.0
+Read part ID: ##PartID = 1700FD25
+LPC2378, 512 kiB ROM / 32 kiB SRAM (385940773)
+Sector 0: ...............................................................................................
+Sector 1: ...............................................................................................
+Sector 2: ...............................................................................................
+Sector 3: ...............................................................................................
+Sector 4: ...................................
+Download Finished... taking 21 seconds
+Now launching the brand new code
+ioctl get ok, status = 0
+ioctl set ok, status = 2
+ioctl get ok, status = 2
+ioctl get ok, status = 2
+ioctl set ok, status = 0
+ioctl get ok, status = 0

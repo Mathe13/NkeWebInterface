@@ -1,0 +1,18 @@
+{% extends "base.html.j2" %}
+{% block title %}
+    Nke web interface-envio de codigo
+{% endblock %}
+{% block imports %}
+{{ super() }}
+<script type="text/javascript" src="{{ url_for('static',filename='js/reqCtrl.js') }}"></script>
+{% endblock %}
+{% block body %}
+{# <form onsubmit="verificar()"> #}
+<select class="form-control" name='op' id='op'>
+<option selected>email</option>
+<option>id</option>
+</select><br>
+<input class="form-control" id='valor' placeholder='valor'><br>
+<button class="btn btn-primary" onclick="verificar()">verificar</button>
+
+{% endblock %}

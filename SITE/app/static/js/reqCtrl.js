@@ -10,6 +10,12 @@ function submeter(){
         return false;
     }
 }
+function verificar(){
+    campo=document.getElementById('op').value;
+    valor=document.getElementById('valor').value;
+    // alert('ola');
+    window.location = "http://127.0.0.1:5000/verificar/"+campo+"/"+valor;
+}
 function verificaExtensao(fileName) {
     if (
         (fileName.match('.rar')) || 

@@ -7,6 +7,9 @@ from flask import render_template,request
 def index():
     return render_template('index.html.j2')
 
+@app.route('/verificacao')
+def viewverificar():
+    return render_template('verifica.html.j2')
 @app.route('/enviacod')
 def pageEnviaCode():
     return render_template('send_req.html.j2')

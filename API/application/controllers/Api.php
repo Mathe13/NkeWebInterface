@@ -46,8 +46,28 @@ class Api extends CI_Controller{
         }
     }
     public function resultado(){
-        $this->load->model('ResultadoModel');
         $method = $this->input->method(TRUE);
+        $this->load->model('ResultadoModel');
+        if($method=='POST'){
+            $data= file_get_contents("php://input");
+            $data=json_decode($data,TRUE);
+            // echo $data;
+            // echo json_last_error();
+            $this->ResultadoModel->add($data);
+        }elseif($method=='GET'){
+            $id_req=$this->input->get('id_req');
+            $lista='';
+            if($id_req){
+                $lista=$this->ResultadoModel->list($id_req,'id_req');
+            }else{
+                $lista=$this->ResultadoModel->list();
+            }
+            if($lista){
+                echo json_encode($lista,JSON_PRETTY_PRINT);
+            }
+
+
+        }
         
     }
     public function salvar(){
@@ -78,8 +98,12 @@ class Api extends CI_Controller{
      }else{
          fwrite($file,$this->upload->display_errors());
      }
+     header('Location:http://127.0.0.1:5000/verificar/email/'.$_POST['InputEmail']);
     }
 
+
+
+    
 
 
 }
